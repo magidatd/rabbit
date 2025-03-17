@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+:root {
+	font-family: 'Inter', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+}
+
+@layer base {
+	button:not([disabled]),
+	[role='button']:not([disabled]) {
+		cursor: pointer;
+	}
+}
+
+@theme {
+	--rabbit-red: hsl(9, 89%, 49%);
+}
+
+@theme inline {
+	--color-rabbit-red: var(--rabbit-red);
+}
