@@ -17,6 +17,9 @@ import MyOrders from './components/orders/my-orders';
 import AdminLayout from './components/admin/layout/admin-layout';
 import AdminHome from './pages/admin/admin-home';
 import UserManagement from './pages/admin/user-management';
+import ProductManagement from './pages/admin/product-management';
+import EditProduct from './pages/admin/edit-product';
+import OrderManagement from './pages/admin/order-management';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
 	const location = useLocation();
@@ -92,6 +95,18 @@ const App = () => {
 						<Route
 							path='users'
 							element={<UserManagement />}
+						/>
+						<Route
+							path='products'
+							element={<ProductManagement />}
+						/>
+						<Route
+							path='products/:id/edit'
+							element={<EditProduct />}
+						/>
+						<Route
+							path='orders'
+							element={<OrderManagement />}
 						/>
 					</Route>
 				</Routes>
