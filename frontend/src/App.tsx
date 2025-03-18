@@ -11,6 +11,9 @@ import { useLayoutEffect } from 'react';
 
 import { ReactNode } from 'react';
 import Checkout from './components/cart/checkout';
+import OrderConfirmation from './pages/order-confirmation';
+import OrderDetails from './pages/order-details';
+import MyOrders from './components/orders/my-orders';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
 	const location = useLocation();
@@ -60,6 +63,18 @@ const App = () => {
 						<Route
 							path='checkout'
 							element={<Checkout />}
+						/>
+						<Route
+							path='order-confirmation'
+							element={<OrderConfirmation />}
+						/>
+						<Route
+							path='order/:id'
+							element={<OrderDetails />}
+						/>
+						<Route
+							path='my-orders'
+							element={<MyOrders />}
 						/>
 					</Route>
 					<Route>{/* Admin Layout */}</Route>

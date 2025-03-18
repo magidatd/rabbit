@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Order {
 	id: string;
@@ -84,7 +85,12 @@ const MyOrders = () => {
 										/>
 									</td>
 									<td className='py-2 px-2 sm:py-4 sm:px-4 font-medium text-gray-900 whitespace-nowrap'>
-										#{order.id}
+										<Link
+											to={`/order/${order.id}`}
+											className='text-blue-500 hover:underline'
+										>
+											#{order.id}
+										</Link>
 									</td>
 									<td className='py-2 px-2 sm:py-4 sm:px-4'>
 										{new Date(order.createdAt).toLocaleDateString()}{' '}
