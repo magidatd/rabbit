@@ -14,6 +14,9 @@ import Checkout from './components/cart/checkout';
 import OrderConfirmation from './pages/order-confirmation';
 import OrderDetails from './pages/order-details';
 import MyOrders from './components/orders/my-orders';
+import AdminLayout from './components/admin/layout/admin-layout';
+import AdminHome from './pages/admin/admin-home';
+import UserManagement from './pages/admin/user-management';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
 	const location = useLocation();
@@ -77,7 +80,20 @@ const App = () => {
 							element={<MyOrders />}
 						/>
 					</Route>
-					<Route>{/* Admin Layout */}</Route>
+					<Route
+						path='/admin'
+						element={<AdminLayout />}
+					>
+						{/* Admin Layout */}
+						<Route
+							index
+							element={<AdminHome />}
+						/>
+						<Route
+							path='users'
+							element={<UserManagement />}
+						/>
+					</Route>
 				</Routes>
 			</Wrapper>
 		</BrowserRouter>
