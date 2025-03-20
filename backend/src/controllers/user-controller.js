@@ -84,7 +84,7 @@ const deleteUser = async (req, res) => {
 	/* Get profile */
 }
 const getProfile = (req, res) => {
-	console.log(req.payload);
+	console.log(req.token);
 };
 
 module.exports = {

@@ -15,8 +15,9 @@ router.post('/users', userController.createUser);
 router.get('/users/:id', userController.getUserByID);
 router.put('/users/:id', userController.updateUser);
 router.delete('/users/:id', userController.deleteUser);
-router.get('/users/profile', (req, res) => {
-	console.log({ token: req.token });
-});
+// router.get('/users/profile', (req, res) => {
+// 	console.log({ token: req.token });
+// });
+router.get('/users/profile', userController.getProfile);
 
 module.exports = router;
