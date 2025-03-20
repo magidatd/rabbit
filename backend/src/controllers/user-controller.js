@@ -1,4 +1,6 @@
 const userService = require('../services/user-service');
+const jwt = require('jsonwebtoken');
+const { isAuthenticated } = require('../middleware/middleware');
 
 {
 	/* Get all users */
@@ -78,10 +80,18 @@ const deleteUser = async (req, res) => {
 	}
 };
 
+{
+	/* Get profile */
+}
+const getProfile = (req, res) => {
+	console.log(req.payload);
+};
+
 module.exports = {
 	getAllUsers,
 	createUser,
 	getUserByID,
 	updateUser,
 	deleteUser,
+	getProfile,
 };

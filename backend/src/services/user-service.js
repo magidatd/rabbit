@@ -71,4 +71,5 @@ module.exports = {
 	getUserByID,
 	updateUser,
 	deleteUser,
+	matchPassword,
 };
