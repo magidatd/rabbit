@@ -9,6 +9,7 @@ const getAllUsers = async (req, res) => {
 
 		res.json(users);
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: 'Failed to fetch users.' });
 	}
 };
@@ -31,6 +32,7 @@ const createUser = async (req, res) => {
 			user: { id: user.id, name: user.name, email: user.email, role: user.role },
 		});
 	} catch (error) {
+		console.error(error);
 		res.status(400).json({ error: 'Failed to create user.' });
 	}
 };
@@ -48,6 +50,7 @@ const getUserByID = async (req, res) => {
 			res.status(404).json({ error: 'User not found.' });
 		}
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: 'Failed to fetch user.' });
 	}
 };
@@ -61,6 +64,7 @@ const updateUser = async (req, res) => {
 
 		res.json(updatedUser);
 	} catch (error) {
+		console.error(error);
 		res.status(400).json({ error: 'Failed to update user.' });
 	}
 };
@@ -74,6 +78,7 @@ const deleteUser = async (req, res) => {
 
 		res.status(204).send({ message: 'User successfully deleted.' });
 	} catch (error) {
+		console.error(error);
 		res.status(400).json({ error: 'Failed to delete user.' });
 	}
 };

@@ -9,6 +9,7 @@ const getAllProducts = async (req, res) => {
 
 		res.json(products);
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: 'Failed to fetch products.' });
 	}
 };
@@ -89,6 +90,7 @@ const createProduct = async (req, res) => {
 			product,
 		});
 	} catch (error) {
+		console.error(error);
 		res.status(400).json({ error: 'Failed to create product.' });
 	}
 };
@@ -106,6 +108,7 @@ const getProductByName = async (req, res) => {
 			res.status(404).json({ error: 'Product not found.' });
 		}
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: 'Failed to fetch product.' });
 	}
 };
@@ -123,6 +126,7 @@ const getProductBySKU = async (req, res) => {
 			res.status(404).json({ error: 'Product not found.' });
 		}
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: 'Failed to fetch product.' });
 	}
 };
@@ -140,6 +144,7 @@ const getProductByID = async (req, res) => {
 			res.status(404).json({ error: 'Product not found.' });
 		}
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: 'Failed to fetch product.' });
 	}
 };
@@ -149,13 +154,71 @@ const getProductByID = async (req, res) => {
 }
 const updateProduct = async (req, res) => {
 	try {
-		const updatedProduct = await productService.updateProduct(
-			req.params.id,
-			req.body,
-		);
+		const {
+			name,
+			description,
+			price,
+			discountPrice,
+			countInStock,
+			category,
+			brand,
+			sizes,
+			colours,
+			collections,
+			material,
+			gender,
+			images,
+			imageAlt,
+			isFeatured,
+			isPublished,
+			tags,
+			dimensionsLength,
+			dimensionsWidth,
+			dimensionsHeight,
+			weight,
+			sku,
+		} = req.body;
 
-		res.json(updatedProduct);
+		const product = await productService.getProductByID(req.params.id);
+
+		if (product) {
+			product.name = name || product.name;
+			product.description = description || product.description;
+			product.price = price || product.price;
+			product.discountPrice = discountPrice || product.discountPrice;
+			product.countInStock = countInStock || product.countInStock;
+			product.category = category || product.category;
+			product.brand = brand || product.brand;
+			product.sizes = sizes || product.sizes;
+			product.colours = colours || product.colours;
+			product.collections = collections || product.collections;
+			product.material = material || product.material;
+			product.gender = gender || product.gender;
+			product.images = images || product.images;
+			product.imageAlt = imageAlt || product.imageAlt;
+			product.isFeatured =
+				isFeatured != undefined ? isFeatured : product.isFeatured;
+			product.isPublished =
+				isPublished != undefined ? isPublished : product.isPublished;
+			product.tags = tags || product.tags;
+			product.dimensionsLength = dimensionsLength || product.dimensionsLength;
+			product.dimensionsWidth = dimensionsWidth || product.dimensionsWidth;
+			product.dimensionsHeight = dimensionsHeight || product.dimensionsHeight;
+			product.weight = weight || product.weight;
+			product.sku = sku || product.sku;
+			product.name = name || product.name;
+
+			const updatedProduct = await productService.updateProduct(
+				req.params.id,
+				product,
+			);
+
+			res.json(updatedProduct);
+		} else {
+			res.status(404).json({ message: 'Product not found' });
+		}
 	} catch (error) {
+		console.error(error);
 		res.status(400).json({ error: 'Failed to update product.' });
 	}
 };
