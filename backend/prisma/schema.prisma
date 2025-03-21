@@ -14,6 +14,7 @@ model User {
   password              String
   role                  roleType @default(customer)
   refreshTokens         RefreshToken[]
+  products              Product[]
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 }
@@ -34,3 +35,59 @@ enum roleType {
   admin
 }
 
+model Product {
+  id                    String @id @unique @default(cuid())
+  name                  String
+  description           String
+  price                 Float
+  discountPrice         Float?
+  countInStock          Float
+  sku                   Float
+  category              String
+  brand                 String?
+  sizes                 String[]
+  colours               String[]
+  collections           String
+  material              String?
+  gender                genderType
+  images                Image?
+  imageAlt              String[]
+  isFeatured            Boolean @default(false)
+  isPublished           Boolean @default(false)
+  rating                Int @default(0)
+  numberOfReviews       Int @default(0)
+  tags                  String[]
+  creator               User @relation(fields: [creatorId], references: [id])
+  creatorId             String
+  metaTitle             String?
+  metaDescription       String?
+  metaKeywords          String?
+  dimensionsLength      Float?
+  dimensionsWidth       Float?
+  dimensionsHeight      Float?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Category {
+  id                    String @id @unique @default(cuid())
+  name                  String @unique
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Image {
+  id                    String @id @unique @default(cuid())
+  url                   String
+  alt                   String?
+  product               Product @relation(fields: [productId], references: [id])
+  productId             String @unique
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+enum genderType {
+  men
+  women
+  unisex
+}
