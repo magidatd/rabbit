@@ -80,9 +80,33 @@ const getProductBySKU = async (sku) => {
 	return await prisma.product.findUnique({ where: { sku: sku } });
 };
 
+{
+	/* Get product by ID */
+}
+const getProductByID = async (id) => {
+	return await prisma.product.findUnique({ where: { id: id } });
+};
+
+{
+	/* Update a product */
+}
+const updateProduct = async (id, data) => {
+	return await prisma.product.update({ where: { id: id }, data });
+};
+
+{
+	/* Delete product */
+}
+const deleteProduct = async (id) => {
+	return await prisma.product.delete({ where: { id: id } });
+};
+
 module.exports = {
 	getAllProducts,
 	createProduct,
 	getProductByName,
 	getProductBySKU,
+	getProductByID,
+	updateProduct,
+	deleteProduct,
 };
