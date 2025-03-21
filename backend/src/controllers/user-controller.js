@@ -83,8 +83,29 @@ const deleteUser = async (req, res) => {
 {
 	/* Get profile */
 }
-const getProfile = (req, res) => {
-	console.log(req.token);
+const getProfile = async (req, res) => {
+	const { id, role } = req.user;
+
+	try {
+		let user = await userService.getUserByID(id);
+
+		if (!user)
+			return res
+				.status(403)
+				.json({ message: 'User with token not found | token expired.' });
+
+		res.json({
+			user: {
+				id: user.id,
+				name: user.name,
+				email: user.email,
+				role: user.role,
+			},
+		});
+	} catch (error) {
+		console.error(error);
+		res.status(500).send('Server error.');
+	}
 };
 
 module.exports = {

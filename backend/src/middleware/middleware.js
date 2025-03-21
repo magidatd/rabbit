@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('../utils/jwt');
 
 {
 	/* Middleware to protect routes */
 }
-const authenticated = (req, res, next) => {
+const authenticated = async (req, res, next) => {
 	const authHeader = req.headers.authorization;
 	if (!authHeader) {
 		return res
@@ -19,14 +19,18 @@ const authenticated = (req, res, next) => {
 				.status(401)
 				.json({ message: 'Authorization failed: No token provided.' });
 
-		req.token = token;
+		const payload = await jwt.verifyToken(token);
+		console.log({ payload: payload.user });
+
+		req.user = payload.user;
+
 		next();
 	} else {
 		return res
 			.status(401)
 			.json({ message: 'Authorization failed: No token provided.' });
 	}
-	next();
+	//next();
 };
 
 module.exports = { authenticated };

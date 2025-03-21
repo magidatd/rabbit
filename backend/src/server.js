@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const userRoutes = require('./routes/user-routes');
-const authRoutes = require('./routes/auth/auth-routes');
+const { userRouter } = require('./routes/user-routes');
+const { authRouter } = require('./routes/auth-routes');
 
 const server = express();
 
@@ -20,9 +20,8 @@ server.get('/', (req, res) => {
 	res.send('WELCOME TO RABBIT SERVER API!');
 });
 
-server.use('/api', userRoutes);
-
-server.use('/api', authRoutes);
+server.use('/api', authRouter);
+server.use('/api/users', userRouter);
 
 server.listen(PORT, () => {
 	console.log(`Rabbit server is running on http://localhost:${PORT}`);

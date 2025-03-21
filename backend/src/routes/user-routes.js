@@ -3,21 +3,22 @@ const userController = require('../controllers/user-controller');
 
 const { authenticated } = require('../middleware/middleware');
 
-const router = express.Router();
+const userRouter = new express.Router();
 
-router.use(authenticated);
+//userRouter.use(authenticated);
 
 {
 	/* Define routes */
 }
-router.get('/users', userController.getAllUsers);
-router.post('/users', userController.createUser);
-router.get('/users/:id', userController.getUserByID);
-router.put('/users/:id', userController.updateUser);
-router.delete('/users/:id', userController.deleteUser);
+userRouter.get('/', userController.getAllUsers);
+userRouter.post('/', userController.createUser);
+userRouter.get('/user/:id', userController.getUserByID);
+userRouter.put('/user/:id', userController.updateUser);
+userRouter.delete('/user/:id', userController.deleteUser);
 // router.get('/users/profile', (req, res) => {
 // 	console.log({ token: req.token });
 // });
-router.get('/users/profile', userController.getProfile);
+//userRouter.use(authenticated);
+userRouter.get('/profile', authenticated, userController.getProfile);
 
-module.exports = router;
+module.exports = { userRouter };
