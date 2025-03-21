@@ -20,7 +20,6 @@ const authenticated = async (req, res, next) => {
 				.json({ message: 'Authorization failed: No token provided.' });
 
 		const payload = await jwt.verifyToken(token);
-		console.log({ payload: payload.user });
 
 		req.user = payload.user;
 

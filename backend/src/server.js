@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const { userRouter } = require('./routes/user-routes');
 const { authRouter } = require('./routes/auth-routes');
+const { productRouter } = require('./routes/product-routes');
 
 const server = express();
 
@@ -22,6 +23,7 @@ server.get('/', (req, res) => {
 
 server.use('/api', authRouter);
 server.use('/api/users', userRouter);
+server.use('/api/products', productRouter);
 
 server.listen(PORT, () => {
 	console.log(`Rabbit server is running on http://localhost:${PORT}`);

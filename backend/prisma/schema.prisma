@@ -37,12 +37,12 @@ enum roleType {
 
 model Product {
   id                    String @id @unique @default(cuid())
-  name                  String
+  name                  String @unique
   description           String
   price                 Float
   discountPrice         Float?
   countInStock          Float
-  sku                   Float
+  sku                   String @unique
   category              String
   brand                 String?
   sizes                 String[]
@@ -50,7 +50,7 @@ model Product {
   collections           String
   material              String?
   gender                genderType
-  images                Image?
+  images                String[]
   imageAlt              String[]
   isFeatured            Boolean @default(false)
   isPublished           Boolean @default(false)
@@ -65,6 +65,7 @@ model Product {
   dimensionsLength      Float?
   dimensionsWidth       Float?
   dimensionsHeight      Float?
+  weight                Float?
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 }
@@ -72,16 +73,6 @@ model Product {
 model Category {
   id                    String @id @unique @default(cuid())
   name                  String @unique
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-}
-
-model Image {
-  id                    String @id @unique @default(cuid())
-  url                   String
-  alt                   String?
-  product               Product @relation(fields: [productId], references: [id])
-  productId             String @unique
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 }

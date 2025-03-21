@@ -1,6 +1,4 @@
 const userService = require('../services/user-service');
-const jwt = require('jsonwebtoken');
-const { isAuthenticated } = require('../middleware/middleware');
 
 {
 	/* Get all users */
@@ -24,7 +22,7 @@ const createUser = async (req, res) => {
 
 		let user = await userService.getUserByEmail(email);
 		if (user) {
-			return res.status(400).json({ message: 'Email currently in use' });
+			return res.status(400).json({ message: 'Email currently in use.' });
 		}
 
 		user = await userService.createUser(req.body);
