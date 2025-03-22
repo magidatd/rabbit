@@ -8,77 +8,66 @@ datasource db {
 }
 
 model User {
-  id                    String @id @unique @default(cuid())
-  name                  String
-  email                 String @unique
-  password              String
-  role                  roleType @default(customer)
-  refreshTokens         RefreshToken[]
-  products              Product[]
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  id            String         @id @unique @default(cuid())
+  name          String
+  email         String         @unique
+  password      String
+  role          String         @default("customer")
+  refreshTokens RefreshToken[]
+  products      Product[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 }
 
 model RefreshToken {
-  id                    String @id @unique @default(cuid())
-  hashedToken           String @unique
-  userId                String
-  user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  revoked               Boolean @default(false)
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-  expireAt              DateTime
-}
-
-enum roleType {
-  customer
-  admin
+  id          String   @id @unique @default(cuid())
+  hashedToken String   @unique
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  revoked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  expireAt    DateTime
 }
 
 model Product {
-  id                    String @id @unique @default(cuid())
-  name                  String @unique
-  description           String
-  price                 Float
-  discountPrice         Float?
-  countInStock          Float
-  sku                   String @unique
-  category              String
-  brand                 String?
-  sizes                 String[]
-  colours               String[]
-  collections           String
-  material              String?
-  gender                genderType
-  images                String[]
-  imageAlt              String[]
-  isFeatured            Boolean @default(false)
-  isPublished           Boolean @default(false)
-  rating                Int @default(0)
-  numberOfReviews       Int @default(0)
-  tags                  String[]
-  creator               User @relation(fields: [creatorId], references: [id])
-  creatorId             String
-  metaTitle             String?
-  metaDescription       String?
-  metaKeywords          String?
-  dimensionsLength      Float?
-  dimensionsWidth       Float?
-  dimensionsHeight      Float?
-  weight                Float?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  id               String   @id @unique @default(cuid())
+  name             String   @unique
+  description      String
+  price            Float
+  discountPrice    Float?
+  countInStock     Float
+  sku              String   @unique
+  category         String
+  brand            String?
+  sizes            String[]
+  colours          String[]
+  collections      String
+  material         String?
+  gender           String
+  images           String[]
+  imageAlt         String[]
+  isFeatured       Boolean  @default(false)
+  isPublished      Boolean  @default(false)
+  rating           Int      @default(0)
+  numberOfReviews  Int      @default(0)
+  tags             String[]
+  creator          User     @relation(fields: [creatorId], references: [id])
+  creatorId        String
+  metaTitle        String?
+  metaDescription  String?
+  metaKeywords     String?
+  dimensionsLength Float?
+  dimensionsWidth  Float?
+  dimensionsHeight Float?
+  weight           Float?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Category {
-  id                    String @id @unique @default(cuid())
-  name                  String @unique
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-}
-
-enum genderType {
-  men
-  women
-  unisex
+  id        String   @id @unique @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

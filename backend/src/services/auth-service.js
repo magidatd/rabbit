@@ -4,7 +4,7 @@ const { hashToken } = require('../utils/hash-token');
 {
 	/* used when we create a refresh token,
     a refresh token is valid for 30 days
-    that means that if a user is inactive for more than 30 days, he will be required to log in again */
+    that means that if a user is inactive for more than 30 days, he will be required to log in again. */
 }
 const addRefreshTokenToWhitelist = async (refreshToken, userId) => {
 	return await prisma.refreshToken.create({

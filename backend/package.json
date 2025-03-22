@@ -5,7 +5,8 @@
 	"main": "src/server.js",
 	"scripts": {
 		"start": "node backend/src/server.js",
-		"dev": "nodemon backend/src/server.js"
+		"dev": "nodemon backend/src/server.js",
+		"seed": "prisma db push && node prisma/seed/index.js"
 	},
 	"keywords": [],
 	"author": "",
